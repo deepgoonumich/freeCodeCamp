@@ -55,7 +55,7 @@ class UsernameSettings extends Component {
     this.state = {
       isFormPristine: true,
       formValue: props.username,
-      display: props.usernameDisplay,
+      display: props.usernameDisplay ? props.usernameDisplay : props.username,
       characterValidation: { valid: false, error: null },
       submitClicked: false,
       isUserNew: tempUserRegex.test(props.username)

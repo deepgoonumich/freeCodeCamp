@@ -208,6 +208,7 @@ export function ShowSettings(props) {
             submitNewAbout={submitNewAbout}
             toggleNightMode={toggleNightMode}
             username={username}
+            usernameDisplay={usernameDisplay}
           />
           <Spacer />
           <Privacy />

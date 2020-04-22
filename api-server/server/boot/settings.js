@@ -189,8 +189,6 @@ function updateMyAbout(req, res, next) {
 function createUpdateMyUsername(app) {
   const { User } = app.models;
   return async function updateMyUsername(req, res, next) {
-    var displayUsername = username;
-    username = username.trim().lower();
     const {
       user,
       body: { username }
@@ -201,6 +199,8 @@ function createUpdateMyUsername(app) {
         message: 'Username is already associated with this account'
       });
     }
+    var displayUsername = username;
+    username = username.trim().lower();
     const validation = isValidUsername(username);
 
     if (!validation.valid) {
