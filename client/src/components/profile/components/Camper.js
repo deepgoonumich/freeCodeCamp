@@ -24,6 +24,7 @@ const propTypes = {
   points: PropTypes.number,
   twitter: PropTypes.string,
   username: PropTypes.string,
+  usernameDisplay: PropTypes.string,
   website: PropTypes.string,
   yearsTopContributor: PropTypes.array
 };
@@ -49,6 +50,7 @@ function joinArray(array) {
 function Camper({
   name,
   username,
+  usernameDisplay,
   location,
   points,
   picture,
@@ -76,7 +78,7 @@ function Camper({
     />
   ) : (
     <Image
-      alt={username + "'s avatar"}
+      alt={usernameDisplay ? usernameDisplay : username + "'s avatar"}
       className='avatar'
       responsive={true}
       src={picture}
@@ -101,7 +103,9 @@ function Camper({
         website={website}
       />
       <br />
-      <h2 className='text-center username'>@{username}</h2>
+      <h2 className='text-center username'>
+        @{usernameDisplay ? usernameDisplay : username}
+      </h2>
       {name && <p className='text-center name'>{name}</p>}
       {location && <p className='text-center location'>{location}</p>}
       {isDonating && (

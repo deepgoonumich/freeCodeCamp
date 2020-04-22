@@ -49,6 +49,7 @@ const propTypes = {
       })
     ),
     email: PropTypes.string,
+    usernameDisplay: PropTypes.string,
     githubProfile: PropTypes.string,
     is2018DataVisCert: PropTypes.bool,
     isApisMicroservicesCert: PropTypes.bool,
@@ -136,6 +137,7 @@ export function ShowSettings(props) {
       isHonest,
       sendQuincyEmail,
       username,
+      usernameDisplay,
       about,
       picture,
       points,
@@ -192,7 +194,9 @@ export function ShowSettings(props) {
           </FullWidthRow>
           <Spacer />
           <h1 className='text-center' style={{ overflowWrap: 'break-word' }}>
-            {`Account Settings for ${username}`}
+            {`Account Settings for ${
+              usernameDisplay ? usernameDisplay : username
+            }`}
           </h1>
           <About
             about={about}

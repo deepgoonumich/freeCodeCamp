@@ -9,6 +9,7 @@ import {
 
 export const publicUserProps = [
   'about',
+  'usernameDisplay',
   'calendar',
   'completedChallenges',
   'githubProfile',

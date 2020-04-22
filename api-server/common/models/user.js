@@ -127,6 +127,7 @@ function nextTick(fn) {
 const getRandomNumber = () => Math.random();
 
 function populateRequiredFields(user) {
+  user.usernameDisplay = user.username;
   user.username = user.username.trim().toLowerCase();
   user.email =
     typeof user.email === 'string'
@@ -723,7 +724,9 @@ export default function(User) {
   };
 
   User.prototype.updateMyUsername = function updateMyUsername(newUsername) {
+    var displayUsername = newUsername;
     return Observable.defer(() => {
+      newUsername = newUsername.trim().toLowerCase();
       const isOwnUsername = isTheSame(newUsername, this.username);
       if (isOwnUsername) {
         return Observable.of(dedent`
@@ -742,12 +745,19 @@ export default function(User) {
       }
 
       const usernameUpdate = new Promise((resolve, reject) =>
-        this.updateAttribute('username', newUsername, err => {
-          if (err) {
-            return reject(err);
+        this.updateAttribute(
+          {
+            username: newUsername,
+            usernameDisplay: displayUsername
+          },
+          err => {
+            if (err) {
+              return reject(err);
+            }
+
+            return resolve();
           }
-          return resolve();
-        })
+        )
       );
 
       return Observable.fromPromise(usernameUpdate).map(

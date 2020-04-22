@@ -22,6 +22,7 @@ const propTypes = {
   navigate: PropTypes.func.isRequired,
   requestedUser: PropTypes.shape({
     username: PropTypes.string,
+    usernameDisplay: PropTypes.string,
     profileUI: PropTypes.object
   }),
   showLoading: PropTypes.bool

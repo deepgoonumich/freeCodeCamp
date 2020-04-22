@@ -23,6 +23,7 @@ const propTypes = {
   isValidUsername: PropTypes.bool,
   submitNewUsername: PropTypes.func.isRequired,
   username: PropTypes.string,
+  usernameDisplay: PropTypes.string,
   validateUsername: PropTypes.func.isRequired,
   validating: PropTypes.bool
 };
@@ -54,6 +55,7 @@ class UsernameSettings extends Component {
     this.state = {
       isFormPristine: true,
       formValue: props.username,
+      display: props.usernameDisplay,
       characterValidation: { valid: false, error: null },
       submitClicked: false,
       isUserNew: tempUserRegex.test(props.username)
@@ -84,12 +86,12 @@ class UsernameSettings extends Component {
     e.preventDefault();
     const { submitNewUsername } = this.props;
     const {
-      formValue,
+      display,
       characterValidation: { valid }
     } = this.state;
 
     return this.setState({ submitClicked: true }, () =>
-      valid ? submitNewUsername(formValue) : null
+      valid ? submitNewUsername(display) : null
     );
   }
 
@@ -160,7 +162,7 @@ class UsernameSettings extends Component {
   render() {
     const {
       isFormPristine,
-      formValue,
+      display,
       characterValidation: { valid, error },
       submitClicked
     } = this.state;
@@ -177,7 +179,7 @@ class UsernameSettings extends Component {
               <FormControl
                 name='username-settings'
                 onChange={this.handleChange}
-                value={formValue}
+                value={display}
               />
             </FormGroup>
           </FullWidthRow>

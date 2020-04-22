@@ -189,6 +189,8 @@ function updateMyAbout(req, res, next) {
 function createUpdateMyUsername(app) {
   const { User } = app.models;
   return async function updateMyUsername(req, res, next) {
+    var displayUsername = username;
+    username = username.trim().lower();
     const {
       user,
       body: { username }
@@ -217,16 +219,22 @@ function createUpdateMyUsername(app) {
       });
     }
 
-    return user.updateAttribute('username', username, err => {
-      if (err) {
-        res.status(500).json(standardErrorMessage);
-        return next(err);
+    return user.updateAttribute(
+      {
+        username: username,
+        usernameDisplay: displayUsername
+      },
+      err => {
+        if (err) {
+          res.status(500).json(standardErrorMessage);
+          return next(err);
+        }
+        return res.status(200).json({
+          type: 'success',
+          message: `We have updated your username to ${username}`
+        });
       }
-      return res.status(200).json({
-        type: 'success',
-        message: `We have updated your username to ${username}`
-      });
-    });
+    );
   };
 }
 

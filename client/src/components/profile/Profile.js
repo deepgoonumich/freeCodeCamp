@@ -114,6 +114,7 @@ function renderProfile(user) {
     website,
     name,
     username,
+    usernameDisplay,
     location,
     points,
     picture,
@@ -149,7 +150,11 @@ function renderProfile(user) {
       {showCerts ? <Certifications username={username} /> : null}
       {showPortfolio ? <Portfolio portfolio={portfolio} /> : null}
       {showTimeLine ? (
-        <Timeline completedMap={completedChallenges} username={username} />
+        <Timeline
+          completedMap={completedChallenges}
+          username={username}
+          usernameDisplay={usernameDisplay}
+        />
       ) : null}
       <Spacer />
     </Fragment>

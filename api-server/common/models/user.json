@@ -74,6 +74,10 @@
       },
       "require": true
     },
+    "usernameDisplay": {
+      "type": "string",
+      "default": ""
+    },
     "about": {
       "type": "string",
       "default": ""
